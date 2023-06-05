@@ -1,6 +1,6 @@
 # SNPFM - Steam Now Playing for Misskey
 
-Steam Now Playing は、node.js で動作する Steam の起動と終了を Misskey に投稿するものです。
+**Steam Now Playing for Misskey** は、Node.js で動作する**任意の Steam ゲーム**の起動と終了を Misskey に投稿するソフトウェアです。
 
 ## 動作確認済みサーバー
 
@@ -9,7 +9,7 @@ Steam Now Playing は、node.js で動作する Steam の起動と終了を Miss
 
 # 使い方
 
-このソフトウェアを使用するには、以下の物が必要です。
+このソフトウェアを使用するには、以下のものが必要です。
 
 - Node.js v18 以降
 - 使用したい Misskey の API キー
@@ -34,8 +34,10 @@ Steam Now Playing は、node.js で動作する Steam の起動と終了を Miss
 ## Steam の Web API キーの取得方法 (STEAM_API_KEY)
 
 1. https://steamcommunity.com/dev/apikey にアクセスします。
-2. ログインしていない場合は、ログインしてください。
-3. **Steam Web API キー登録**というページが表示されるので、自身が持っているドメイン名を入力してください。所有していない場合は example.com や localhost でも大丈夫です。
+2. 自身のアカウントでログインされていることを確認してください。  
+   違うアカウントでログインされている場合は使用したいアカウントで再ログインしてください。
+3. **Steam Web API キー登録**というページが表示されるので、自身が持っているドメイン名を入力してください。  
+   所有していない場合は example.com や localhost でも大丈夫です。
 4. 同意規約(英文)を読み、**I agree to the Steam Web API Terms of Use**にチェックを入れて**登録ボタン**を押します。
 5. **あなたの Steam Web API キー**という画面が表示されるので、**API**のキーをコピーします。
 
