@@ -52,7 +52,7 @@ async function runner() {
         const timeStr = unixToTime(time);
 
         client.send(
-          `ゲームを終了しました\nゲーム: [${gameName}](${gameUrl})\nプレイ時間: ${timeStr}`,
+          `ゲームを終了しました\nプレイしていたゲーム: [${gameName}](${gameUrl})\nプレイ時間: ${timeStr}`,
           "public",
           false,
           null
