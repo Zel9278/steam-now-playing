@@ -13,6 +13,7 @@ const client = new Client(MISSKEY_HOST, MISSKEY_API_KEY);
 let gameId = undefined;
 let gameUrl = null;
 let gameName = null;
+let isTool = false;
 let timer = null;
 
 client.on("ws:connected", async (me) => {
@@ -23,17 +24,24 @@ client.on("ws:connected", async (me) => {
 
 async function runner() {
   try {
-    const { data } = await axios.get(
-      getSteamApiURL(STEAM_API_KEY, STEAM_USER_ID)
+    const { data: userData } = await axios.get(
+      getSteamUserURL(STEAM_API_KEY, STEAM_USER_ID)
     );
-    const { players } = data?.response;
+
+    const { players } = userData?.response;
 
     const { gameextrainfo, gameid } = players[0];
 
     if (gameId !== gameid) {
-      gameId = gameid;
-
       if (!undefinedOrNull(gameextrainfo)) {
+        gameId = gameid;
+
+        const { data: appData } = await axios.get(getSteamAppURL(gameid));
+
+        if (appData[gameid]?.data.genres.find((g) => g.id === "57"))
+          return (isTool = true);
+
+        isTool = false;
         timer = new Date().getTime();
         gameName = gameextrainfo;
         gameUrl = getGameUrl(gameid);
@@ -46,6 +54,7 @@ async function runner() {
           null
         );
       } else {
+        if (isTool) return;
         console.log(`Game closed!`);
 
         const time = new Date().getTime() - timer;
@@ -57,6 +66,8 @@ async function runner() {
           false,
           null
         );
+
+        gameId = undefined;
       }
     }
   } catch (error) {
@@ -64,8 +75,12 @@ async function runner() {
   }
 }
 
-function getSteamApiURL(key, id) {
+function getSteamUserURL(key, id) {
   return `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${key}&format=json&steamids=${id}`;
+}
+
+function getSteamAppURL(id) {
+  return `https://store.steampowered.com/api/appdetails?appids=${id}`;
 }
 
 function getGameUrl(id) {
