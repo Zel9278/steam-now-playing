@@ -4,7 +4,7 @@
 
 ## 動作確認済みサーバー
 
-- [Misskey](https://github.com/misskey-dev/misskey) (13.13.0-beta.3)
+- [Misskey](https://github.com/misskey-dev/misskey) (13.13.0-beta.3, 13.12.2)
 - [Calckey](https://codeberg.org/calckey/calckey) (14.0.0-dev26)
 
 # 使い方
